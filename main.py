@@ -1,8 +1,6 @@
 from fastapi import FastAPI
+from routers import login, healthcheck
 
 app = FastAPI()
-
-
-@app.get('/')
-async def status():
-    return {"status":"alive"}
+app.include_router(healthcheck.router)
+app.include_router(login.router, prefix="/login")
